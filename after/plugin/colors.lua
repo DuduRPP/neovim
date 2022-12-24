@@ -18,12 +18,12 @@ function ColorMyPencils(color)
         vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
         vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
         vim.cmd(":hi LineNr guifg=#6690b7")
-    end
-    if (color == "catppuccin" or color == "catpuccin" or color == "cat") then
-        vim.cmd.colorscheme "catppuccin"
+    else
+        color = color or "catppuccin"
+        vim.cmd.colorscheme(color)  -- set the colorscheme
     end
     vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
     vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 end
 
-ColorMyPencils()
+ColorMyPencils("")
