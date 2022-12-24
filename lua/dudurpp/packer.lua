@@ -8,6 +8,7 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	use 'folke/tokyonight.nvim'
+    use { "catppuccin/nvim", as = "catppuccin" }
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -46,5 +47,10 @@ return require('packer').startup(function(use)
 			{ 'rafamadriz/friendly-snippets' },
 		}
 	}
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
 end)
