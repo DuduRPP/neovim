@@ -1,34 +1,45 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-	-- Packer can manage itself
-	use 'wbthomason/packer.nvim'
+return require('lazy').setup({
 
-	use 'folke/tokyonight.nvim'
-    use { "catppuccin/nvim", as = "catppuccin" }
+	'folke/tokyonight.nvim',
+    { "catppuccin/nvim", name = "catppuccin" },
 
-	use {
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+    'ggandor/leap.nvim',
+
+	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		-- or                            , branch = '0.1.x',
-		requires = { { 'nvim-lua/plenary.nvim' } }
-	}
+		dependencies = { { 'nvim-lua/plenary.nvim' } }
+	},
 
-	use {
+	{
 		'nvim-treesitter/nvim-treesitter',
-		run = function()
+		build = function()
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
 		end,
-	}
+	},
 
-	use("theprimeagen/harpoon")
+	"theprimeagen/harpoon",
 
-	use {
+	{
 		'VonHeikemen/lsp-zero.nvim',
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{ 'neovim/nvim-lspconfig' },
 			{ 'williamboman/mason.nvim' },
@@ -46,15 +57,19 @@ return require('packer').startup(function(use)
 			{ 'L3MON4D3/LuaSnip' },
 			{ 'rafamadriz/friendly-snippets' },
 		}
-	}
+	},
 
-    use {
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+        dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+    },
 
-    use {
+    {
 	    "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
-    }
-end)
+    },
+
+    {"akinsho/toggleterm.nvim", config = function()
+        require("toggleterm").setup()
+    end},
+})

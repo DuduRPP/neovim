@@ -20,7 +20,7 @@ lsp.configure('sumneko_lua', {
     }
 })
 
-
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -29,14 +29,23 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-y>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
-
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 -- disable completion with tab
 -- this helps with copilot setup
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+  mapping = cmp_mappings,
+  sources = {
+    { name = 'path'},
+    { name = 'nvim_lsp', keyword_length = 1},
+    { name = 'nvim_lua', keyword_length = 2},
+    { name = 'buffer', keyword_length = 1},
+  }
 })
 
 lsp.set_preferences({

@@ -1,3 +1,7 @@
+for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+  config.install_info.use_makefile = true
+  config.install_info.cxx_standard = 'c++14'
+end
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "help","javascript","typescript","python","c", "lua", "rust" },
