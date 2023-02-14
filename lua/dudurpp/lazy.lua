@@ -20,6 +20,7 @@ return require('lazy').setup({
     'tpope/vim-surround',
     'tpope/vim-repeat',
     'ggandor/leap.nvim',
+    'mg979/vim-visual-multi',
 
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
