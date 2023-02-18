@@ -19,6 +19,8 @@ return require('lazy').setup({
 
     'tpope/vim-surround',
     'tpope/vim-repeat',
+    'tpope/vim-commentary',
+
     'ggandor/leap.nvim',
     'mg979/vim-visual-multi',
 
