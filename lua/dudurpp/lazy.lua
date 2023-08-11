@@ -24,6 +24,20 @@ return require('lazy').setup({
     'ggandor/leap.nvim',
     'mg979/vim-visual-multi',
 
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    },
+
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		-- or                            , branch = '0.1.x',
@@ -64,9 +78,9 @@ return require('lazy').setup({
 
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
     },
-
+ 
     {
 	    "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
